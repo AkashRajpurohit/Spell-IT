@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:spell_it/pages/home.dart';
-import 'package:spell_it/pages/loading.dart';
 import 'package:spell_it/pages/game.dart';
 
 void main() => runApp(MaterialApp(
+  debugShowCheckedModeBanner: false,
   theme: ThemeData(
     primaryColor: Colors.redAccent,
   ),
-  initialRoute: '/home',
+  initialRoute: '/',
   routes: {
-    '/': (context) => Loading(),
-    '/home': (context) => Home(),
+    '/': (context) => Home(),
     '/game': (context) => Game()
   },
 ));
