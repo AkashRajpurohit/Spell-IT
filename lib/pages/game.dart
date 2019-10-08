@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:spell_it/services/level.dart';
 
 class Game extends StatefulWidget {
@@ -6,14 +9,62 @@ class Game extends StatefulWidget {
   _GameState createState() => _GameState();
 }
 
+enum TtsState { playing, stopped }
+
 class _GameState extends State<Game> {
   dynamic data;
   Level level;
   List<String> questions;
+  FlutterTts flutterTts;
+
+  TtsState ttsState = TtsState.stopped;
+
+  get isPlaying => ttsState == TtsState.playing;
+
+  get isStopped => ttsState == TtsState.stopped;
+
+  Future _speak(String word) async {
+    await flutterTts.speak(word);
+  }
+
+  initTts() {
+    flutterTts = new FlutterTts();
+
+    flutterTts.setStartHandler(() {
+      setState(() {
+        ttsState = TtsState.playing;
+      });
+    });
+
+    flutterTts.setCompletionHandler(() {
+      setState(() {
+        ttsState = TtsState.stopped;
+      });
+    });
+
+    flutterTts.setErrorHandler((msg) {
+      setState(() {
+        ttsState = TtsState.stopped;
+      });
+    });
+
+    _setVolume();
+  }
+
+  _setVolume() async {
+    await flutterTts.setVolume(3.0);
+  }
 
   @override
   void initState() {
     super.initState();
+    initTts();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    flutterTts.stop();
   }
 
   @override
@@ -49,8 +100,10 @@ class _GameState extends State<Game> {
         width: 70.0,
         child: FittedBox(
           child: FloatingActionButton(
-            onPressed: () {},
-            backgroundColor: Colors.redAccent,
+            onPressed: () {
+              _speak("Text to speech works");
+            },
+            backgroundColor: Theme.of(context).primaryColor,
             child: Icon(
               Icons.speaker_phone,
               size: 35.0,
