@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:spell_it/services/level.dart';
 
-class Game extends StatelessWidget {
+class Game extends StatefulWidget {
+  @override
+  _GameState createState() => _GameState();
+}
+
+class _GameState extends State<Game> {
+  Map<String, Level> data;
+  Level level;
+
   @override
   Widget build(BuildContext context) {
+    data = ModalRoute.of(context).settings.arguments;
+    level = data['level'];
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Game"),
+        title: Text('${level.name} Level'),
         centerTitle: true,
       ),
       body: Center(
@@ -13,7 +25,7 @@ class Game extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "This is game screen",
+              "This is game screen for ${level.name} Level",
               style: TextStyle(
                 fontSize: 20.0,
                 color: Colors.grey[600]
