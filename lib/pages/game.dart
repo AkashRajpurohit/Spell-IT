@@ -7,13 +7,23 @@ class Game extends StatefulWidget {
 }
 
 class _GameState extends State<Game> {
-  Map<String, Level> data;
+  dynamic data;
   Level level;
+  List<String> questions;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
     level = data['level'];
+    questions = data['questions'];
+
+    print(level.name);
+    print(questions);
 
     return Scaffold(
       appBar: AppBar(

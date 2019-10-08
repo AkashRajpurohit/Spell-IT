@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spell_it/services/game_data.dart';
 import 'package:spell_it/services/level.dart';
 
 class Home extends StatefulWidget {
@@ -16,8 +17,12 @@ class _HomeState extends State<Home> {
   ];
 
   void _goToGame(Level level) {
+    GameData instance = GameData(levelName: level.name);
+    instance.getQuestions();
+
     Navigator.pushNamed(context, '/game', arguments: {
-      'level': level
+      'level': level,
+      'questions': instance.questions
     });
   }
 
