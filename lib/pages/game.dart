@@ -44,6 +44,21 @@ class _GameState extends State<Game> {
           ],
         ),
       ),
+      floatingActionButton: Container(
+        height: 70.0,
+        width: 70.0,
+        child: FittedBox(
+          child: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: Colors.redAccent,
+            child: Icon(
+              Icons.speaker_phone,
+              size: 35.0,
+            ),
+          )
+        )
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
