@@ -33,30 +33,47 @@ class _HomeState extends State<Home> {
         title: Text("Spell-IT"),
         centerTitle: true,
       ),
-      body: ListView.builder(
-        itemCount: levels.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Card(
-              color: levels[index].color,
-              child: ListTile(
-                onTap: () { 
-                  _goToGame(levels[index]); 
-                },
-                title: Text(
-                  "${levels[index].name}",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30.0,
-                    letterSpacing: 5.0
-                  ),
-                ),
-                contentPadding: EdgeInsets.all(12.0),
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(8.0, 30.0, 8.0, 0.0),
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 12.0),
+              child: CircleAvatar(
+                backgroundImage: AssetImage('assets/logo.png'),
+                radius: 100.0,
               ),
             ),
-          );
-        },
+            Expanded(
+                child: GridView.count(
+                crossAxisCount: 2,
+                children: List.generate(4, (index) {
+                  return Center(
+                    child: Card(
+                      color: levels[index].color,
+                      child: ListTile(
+                        onTap: () {
+                          _goToGame(levels[index]);
+                        },
+                        title: Center(
+                          child: Text(
+                            "${levels[index].name}",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30.0,
+                              letterSpacing: 5.0
+                            ),
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.fromLTRB(10.0, 50.0, 10.0, 50.0)
+                      ),
+                    )
+                  );
+                }),
+              ),
+            ),
+          ],
+        ),
       )
     );
   }

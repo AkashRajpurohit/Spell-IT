@@ -86,7 +86,7 @@ class _GameState extends State<Game> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "This is game screen for ${level.name} Level",
+              "Game screen for ${level.name} Level",
               style: TextStyle(
                 fontSize: 20.0,
                 color: Colors.grey[600]
