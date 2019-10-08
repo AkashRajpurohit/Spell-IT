@@ -52,7 +52,7 @@ class _GameState extends State<Game> {
   }
 
   _setVolume() async {
-    await flutterTts.setVolume(3.0);
+    await flutterTts.setVolume(1.0);
   }
 
   @override
