@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:spell_it/components/game_screen.dart';
 import 'package:spell_it/services/level.dart';
 
 class Game extends StatefulWidget {
@@ -81,37 +82,12 @@ class _GameState extends State<Game> {
         title: Text('${level.name} Level'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "Game screen for ${level.name} Level",
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.grey[600]
-              ),
-            )
-          ],
-        ),
+      body: PageView.builder(
+        itemCount: 2,
+        itemBuilder: (context, index) {
+          return GameScreen();
+        },
       ),
-      floatingActionButton: Container(
-        height: 70.0,
-        width: 70.0,
-        child: FittedBox(
-          child: FloatingActionButton(
-            onPressed: () {
-              _speak("Text to speech works");
-            },
-            backgroundColor: Theme.of(context).primaryColor,
-            child: Icon(
-              Icons.speaker_phone,
-              size: 35.0,
-            ),
-          )
-        )
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
