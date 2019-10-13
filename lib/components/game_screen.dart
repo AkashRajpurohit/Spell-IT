@@ -16,6 +16,8 @@ class GameScreen extends StatefulWidget {
 enum TtsState { playing, stopped }
 
 class _GameScreenState extends State<GameScreen> {
+  String question;
+
   FlutterTts flutterTts;
 
   TtsState ttsState = TtsState.stopped;
@@ -56,9 +58,17 @@ class _GameScreenState extends State<GameScreen> {
     await flutterTts.setVolume(1.0);
   }
 
+  void initGame() {
+    question = widget.question;
+    question = question.replaceRange(0, 1, "_");
+    question = question.replaceRange(question.length ~/ 2, question.length ~/ 2 + 1, "_");
+    question = question.replaceRange(question.length - 1, question.length, "_");
+  }
+
   @override
   void initState() {
     super.initState();
+    initGame();
     initTts();
   }
 
@@ -76,7 +86,7 @@ class _GameScreenState extends State<GameScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            "${widget.question}",
+            "$question",
             style: TextStyle(
               fontSize: 45.0,
               letterSpacing: 5.0

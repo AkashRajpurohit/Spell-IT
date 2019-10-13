@@ -6,7 +6,7 @@ class GameData {
 
   void getQuestions() {
     // TODO: Fetch data from API based on level
-    List<String> questions = ["rat", "cat", "mouse", "horse", "aeroplane", "turtle", "doormat"];
+    List<String> questions = ["doormat", "mobile", "apple", "horse", "aeroplane", "singer"];
 
     this.questions = questions;
   }
