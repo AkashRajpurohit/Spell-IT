@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:spell_it/components/alert.dart';
 
 class GameScreen extends StatefulWidget {
 
@@ -97,11 +98,12 @@ class _GameScreenState extends State<GameScreen> {
             padding: EdgeInsets.fromLTRB(60.0, 0.0, 60.0, 0.0),
             child: TextField(
               maxLength: widget.question.length,
-              onChanged: (value) {
-                print("Changed value: $value");
-              },
               onSubmitted: (value) {
-                print("Submitted value: $value");
+                if(value.toLowerCase() == widget.question.toLowerCase()) {
+                  return Alert().showAlert(context, "Correct!", "You got it right!");
+                } else {
+                  return Alert().showAlert(context, "Wrong!", "Try again!");
+                }
               },
               style: TextStyle(
                 fontSize: 30.0
