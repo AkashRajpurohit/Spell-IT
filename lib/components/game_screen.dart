@@ -7,10 +7,14 @@ class GameScreen extends StatefulWidget {
 
   final String question;
   final String level;
+  final List<dynamic> gameScoreList;
+  final Score gameScore;
 
   GameScreen({
     @required this.question,
-    @required this.level
+    @required this.level,
+    @required this.gameScoreList,
+    @required this.gameScore
   });
 
   @override
@@ -24,7 +28,9 @@ class _GameScreenState extends State<GameScreen> {
 
   FlutterTts flutterTts;
 
-  Score gameScore;
+  List<dynamic> gameScoreList;
+
+  bool isSolved = false;
 
   TtsState ttsState = TtsState.stopped;
 
@@ -62,11 +68,17 @@ class _GameScreenState extends State<GameScreen> {
 
   _setVolume() async {
     await flutterTts.setVolume(1.0);
-    print(await gameScore.getScore());
+  }
+
+  getGameScoreList() {
+    print(widget.gameScoreList);
+    if(widget.gameScoreList.contains(widget.question)) {
+      isSolved = true;
+    }
   }
 
   void initGame() {
-    gameScore = Score(level: widget.level);
+    getGameScoreList();
     question = widget.question;
     int times = (question.length ~/ 2) - 1;
     question = question.replaceRange(1, (question.length ~/ 2), "_" * times);
@@ -89,10 +101,13 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
 
+    String text = isSolved ? 'solved' : 'not solved';
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Text('$text'),
           Text(
             "$question",
             style: TextStyle(
@@ -107,7 +122,7 @@ class _GameScreenState extends State<GameScreen> {
               maxLength: widget.question.length,
               onSubmitted: (value) async {
                 if(value.toLowerCase() == widget.question.toLowerCase()) {
-                  await gameScore.addScore(value);
+                  await widget.gameScore.addScore(value);
 
                   return Alert().showAlert(context, "Correct!", "You got it right!");
                 } else {

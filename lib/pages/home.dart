@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spell_it/services/game_data.dart';
 import 'package:spell_it/services/level.dart';
+import 'package:spell_it/services/score.dart';
 
 class Home extends StatefulWidget {
 
@@ -16,13 +17,19 @@ class _HomeState extends State<Home> {
     Level(name: "Extreme", number: 4, color: Colors.red)
   ];
 
-  void _goToGame(Level level) {
+  void _goToGame(Level level) async {
     GameData instance = GameData(levelName: level.name);
     instance.getQuestions();
 
+    Score gameScore = Score(level: level.name);
+
+    List<dynamic> gameScoreList = await gameScore.getScore();
+
     Navigator.pushNamed(context, '/game', arguments: {
       'level': level,
-      'questions': instance.questions
+      'questions': instance.questions,
+      'gameScoreList': gameScoreList,
+      'gameScore': gameScore
     });
   }
 
