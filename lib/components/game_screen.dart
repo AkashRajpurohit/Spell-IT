@@ -126,7 +126,9 @@ class _GameScreenState extends State<GameScreen> {
               onSubmitted: (value) async {
                 if(value.toLowerCase() == widget.question.toLowerCase()) {
                   await widget.gameScore.addScore(value);
-
+                  setState(() {
+                    isSolved = true;
+                  });
                   return Alert().showAlert(context, "Correct!", "You got it right!");
                 } else {
                   return Alert().showAlert(context, "Wrong!", "Try again!");
@@ -138,7 +140,7 @@ class _GameScreenState extends State<GameScreen> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 100.0),
+            margin: EdgeInsets.only(top: 50.0),
             height: 70.0,
             width: 70.0,
             child: FittedBox(
