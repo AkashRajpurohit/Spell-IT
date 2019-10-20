@@ -97,7 +97,7 @@ class _GameScreenState extends State<GameScreen> {
             "$question",
             style: TextStyle(
               fontSize: 45.0,
-              letterSpacing: 5.0
+              letterSpacing: 2.0
             ),
           ),
           SizedBox(height: 10.0),
