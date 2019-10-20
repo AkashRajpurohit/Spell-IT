@@ -68,9 +68,9 @@ class _GameScreenState extends State<GameScreen> {
   void initGame() {
     gameScore = Score(level: widget.level);
     question = widget.question;
-    question = question.replaceRange(1, (question.length ~/ 2), "_");
-    question = question.replaceRange((question.length ~/ 2) + 1, question.length - 1, "_");
-    // question = question.replaceRange(question.length ~/ 2, question.length ~/ 2 + 1, "_");
+    int times = (question.length ~/ 2) - 1;
+    question = question.replaceRange(1, (question.length ~/ 2), "_" * times);
+    question = question.replaceRange((question.length ~/ 2) + 1, question.length % 2 == 0 ? question.length : question.length - 1, "_" * times);
   }
 
   @override
