@@ -26,7 +26,7 @@ class _GameState extends State<Game> {
       body: PageView.builder(
         itemCount: questions.length,
         itemBuilder: (context, index) {
-          return GameScreen(question: questions[index]);
+          return GameScreen(question: questions[index], level: level.number.toString());
         },
       ),
     );

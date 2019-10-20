@@ -2,17 +2,16 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:spell_it/services/level.dart';
 
 class Score {
-  Level level;
+  String level;
 
   Score({ @required this.level });
 
-  Future<List<String>> getScore() async {
+  Future<List<dynamic>> getScore() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    String scoresString = prefs.getString(this.level.toString());
+    String scoresString = prefs.getString(this.level);
 
     if(scoresString == null) {
       scoresString = "[]";
@@ -24,12 +23,14 @@ class Score {
   Future<void> addScore(String value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    List<String> scoreList = await getScore();
+    List<dynamic> scoreList = await getScore();
 
-    scoreList.add(value);
+    if(!scoreList.contains(value)) {
+      scoreList.add(value);
+    }
 
     String updatedScoreString = json.encode(scoreList);
 
-    prefs.setString(this.level.toString(), updatedScoreString);
+    prefs.setString(this.level, updatedScoreString);
   }
 }

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:spell_it/components/alert.dart';
+import 'package:spell_it/services/score.dart';
 
 class GameScreen extends StatefulWidget {
 
   final String question;
+  final String level;
 
   GameScreen({
     @required this.question,
+    @required this.level
   });
 
   @override
@@ -20,6 +23,8 @@ class _GameScreenState extends State<GameScreen> {
   String question;
 
   FlutterTts flutterTts;
+
+  Score gameScore;
 
   TtsState ttsState = TtsState.stopped;
 
@@ -57,13 +62,15 @@ class _GameScreenState extends State<GameScreen> {
 
   _setVolume() async {
     await flutterTts.setVolume(1.0);
+    print(await gameScore.getScore());
   }
 
   void initGame() {
+    gameScore = Score(level: widget.level);
     question = widget.question;
-    question = question.replaceRange(0, 1, "_");
-    question = question.replaceRange(question.length ~/ 2, question.length ~/ 2 + 1, "_");
-    question = question.replaceRange(question.length - 1, question.length, "_");
+    question = question.replaceRange(1, (question.length ~/ 2), "_");
+    question = question.replaceRange((question.length ~/ 2) + 1, question.length - 1, "_");
+    // question = question.replaceRange(question.length ~/ 2, question.length ~/ 2 + 1, "_");
   }
 
   @override
@@ -98,8 +105,10 @@ class _GameScreenState extends State<GameScreen> {
             padding: EdgeInsets.fromLTRB(60.0, 0.0, 60.0, 0.0),
             child: TextField(
               maxLength: widget.question.length,
-              onSubmitted: (value) {
+              onSubmitted: (value) async {
                 if(value.toLowerCase() == widget.question.toLowerCase()) {
+                  await gameScore.addScore(value);
+
                   return Alert().showAlert(context, "Correct!", "You got it right!");
                 } else {
                   return Alert().showAlert(context, "Wrong!", "Try again!");
