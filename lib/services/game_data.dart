@@ -6,7 +6,7 @@ class GameData {
 
   void getQuestions() {
     if(levelName == "Easy") {
-      this.questions = ["dog", "kitten", "sound", "this", "super", "singer"];
+      this.questions = ["mango", "kitten", "sound", "tonight", "super", "singer"];
     } else if(levelName == "Medium") {
       this.questions = ["doormat", "telephone", "apple", "tomorrow", "aeroplane", "savage"];
     } else if(levelName == "Hard") {
