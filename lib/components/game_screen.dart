@@ -71,7 +71,6 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   getGameScoreList() {
-    print(widget.gameScoreList);
     if(widget.gameScoreList.contains(widget.question)) {
       isSolved = true;
     }
@@ -101,13 +100,17 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
 
-    String text = isSolved ? 'solved' : 'not solved';
+    String imageUrl = isSolved ? 'correct.gif' : 'warning.png';
 
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text('$text'),
+          CircleAvatar(
+            backgroundImage: AssetImage('assets/$imageUrl'),
+            radius: 50,
+          ),
+          SizedBox(height: 10.0),
           Text(
             "$question",
             style: TextStyle(
