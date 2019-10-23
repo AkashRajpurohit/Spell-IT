@@ -11,7 +11,7 @@ class Game extends StatefulWidget {
 class _GameState extends State<Game> {
   dynamic data;
   Level level;
-  List<String> questions;
+  List<dynamic> questions;
   List<dynamic> gameScoreList;
   Score gameScore;
 

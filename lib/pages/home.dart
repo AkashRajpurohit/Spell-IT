@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
 
   void _goToGame(Level level) async {
     GameData instance = GameData(levelName: level.name);
-    instance.getQuestions();
+    await instance.getQuestions();
 
     Score gameScore = Score(level: level.name);
 

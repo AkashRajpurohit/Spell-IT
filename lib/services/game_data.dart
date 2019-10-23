@@ -1,18 +1,24 @@
+import 'dart:convert';
+
+import 'package:http/http.dart';
+
 class GameData {
   String levelName;
-  List<String> questions;
+  List<dynamic> questions;
 
   GameData({ this.levelName });
 
-  void getQuestions() {
-    if(levelName == "Easy") {
+  Future<void> getQuestions() async {
+
+    try {
+      Response response = await get('https://spell-it-akash.firebaseapp.com/level/$levelName');
+
+      Map data = json.decode(response.body);
+
+      this.questions = data['data'];
+    } catch(e) {
+      print(e);
       this.questions = ["mango", "kitten", "sound", "tonight", "super", "singer"];
-    } else if(levelName == "Medium") {
-      this.questions = ["doormat", "telephone", "apple", "tomorrow", "aeroplane", "savage"];
-    } else if(levelName == "Hard") {
-      this.questions = ["penguin", "squirrel", "choir", "colonel", "isthmus", "phenomenon"];
-    } else if(levelName == "Extreme") {
-      this.questions = ["anathema", "anemone", "defibrillator", "ignominious", "massachusetts", "onomatopoeia"];
     }
   }
 }
