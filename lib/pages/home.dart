@@ -19,25 +19,55 @@ class _HomeState extends State<Home> {
 
   bool isLoading = false;
 
+  Future<bool> canGoToNextLevel(int currentLevelNumber) async {
+    if(currentLevelNumber == 1) {
+      return true;
+    }
+
+    Level prevLevel = levels[currentLevelNumber - 2];
+    
+    GameData prevData = GameData(levelName: prevLevel.name);
+
+    await prevData.getQuestions();
+
+    Score gameScore = Score(level: prevLevel.name);
+
+    List<dynamic> gameScoreList = await gameScore.getScore();
+
+    int totalQuestions = prevData.questions.length;
+    int totalSolved = gameScoreList.length;
+
+    // If user has solved more than 60% of questions from previous level then only allow to go for next level
+    if((totalSolved / totalQuestions) * 100 > 60.0) {
+      return true;
+    }
+
+    return false;
+  }
+
   void _goToGame(Level level) async {
     setState(() {
       isLoading = true;
     });
 
-    GameData instance = GameData(levelName: level.name);
+    if(await canGoToNextLevel(level.number)) {
+      GameData instance = GameData(levelName: level.name);
 
-    await instance.getQuestions();
+      await instance.getQuestions();
 
-    Score gameScore = Score(level: level.name);
+      Score gameScore = Score(level: level.name);
 
-    List<dynamic> gameScoreList = await gameScore.getScore();
+      List<dynamic> gameScoreList = await gameScore.getScore();
 
-    Navigator.pushNamed(context, '/game', arguments: {
-      'level': level,
-      'questions': instance.questions,
-      'gameScoreList': gameScoreList,
-      'gameScore': gameScore
-    });
+      Navigator.pushNamed(context, '/game', arguments: {
+        'level': level,
+        'questions': instance.questions,
+        'gameScoreList': gameScoreList,
+        'gameScore': gameScore
+      });
+    } else {
+      print("Nope");
+    }
 
     setState(() {
       isLoading = false;
