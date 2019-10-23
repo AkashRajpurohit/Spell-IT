@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spell_it/services/game_data.dart';
 import 'package:spell_it/services/level.dart';
 import 'package:spell_it/services/score.dart';
+import 'package:spell_it/components/alert.dart';
 
 class Home extends StatefulWidget {
 
@@ -66,7 +67,7 @@ class _HomeState extends State<Home> {
         'gameScore': gameScore
       });
     } else {
-      print("Nope");
+      Alert().showAlert(context, "Oops!", "Please finish 60% of questions from ${levels[level.number - 2].name} level to unlock ${level.name} level!");
     }
 
     setState(() {
