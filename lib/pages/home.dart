@@ -17,8 +17,15 @@ class _HomeState extends State<Home> {
     Level(name: "Extreme", number: 4, color: Colors.red)
   ];
 
+  bool isLoading = false;
+
   void _goToGame(Level level) async {
+    setState(() {
+      isLoading = true;
+    });
+
     GameData instance = GameData(levelName: level.name);
+
     await instance.getQuestions();
 
     Score gameScore = Score(level: level.name);
@@ -30,6 +37,10 @@ class _HomeState extends State<Home> {
       'questions': instance.questions,
       'gameScoreList': gameScoreList,
       'gameScore': gameScore
+    });
+
+    setState(() {
+      isLoading = false;
     });
   }
 
@@ -51,7 +62,7 @@ class _HomeState extends State<Home> {
                 radius: 100.0,
               ),
             ),
-            Expanded(
+            !isLoading ? Expanded(
                 child: GridView.count(
                 crossAxisCount: 2,
                 children: List.generate(4, (index) {
@@ -78,7 +89,12 @@ class _HomeState extends State<Home> {
                   );
                 }),
               ),
-            ),
+            ) : Center(
+              heightFactor: 10.0,
+              child: CircularProgressIndicator(
+                strokeWidth: 4.0,
+              )
+            )
           ],
         ),
       )
