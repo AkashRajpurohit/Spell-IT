@@ -1,6 +1,7 @@
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:http/http.dart';
+import 'package:spell_it/components/alert.dart';
 
 class GameData {
   String levelName;
@@ -16,9 +17,10 @@ class GameData {
       Map data = json.decode(response.body);
 
       this.questions = data['data'];
+    } on SocketException catch(e) {
+      this.questions = [-1];
     } catch(e) {
-      print(e);
-      this.questions = ["mango", "kitten", "sound", "tonight", "super", "singer"];
+      this.questions = [-2];
     }
   }
 }

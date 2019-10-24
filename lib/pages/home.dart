@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
 
   bool isLoading = false;
 
-  Future<bool> canGoToNextLevel(int currentLevelNumber) async {
+  Future<dynamic> canGoToNextLevel(int currentLevelNumber) async {
     if(currentLevelNumber == 1) {
       return true;
     }
@@ -30,6 +30,18 @@ class _HomeState extends State<Home> {
     GameData prevData = GameData(levelName: prevLevel.name);
 
     await prevData.getQuestions();
+
+    if(prevData.questions[0] == -1) {
+      setState(() {
+        isLoading = false;
+      });
+      return Alert().showAlert(context, "Error!", "Please ensure you have an active internet connection!");
+    } else if(prevData.questions[0] == -2) {
+      setState(() {
+        isLoading = false;
+      });
+      return Alert().showAlert(context, "Error!", "Something went wrong. Please try again later");
+    }
 
     Score gameScore = Score(level: prevLevel.name);
 
@@ -46,7 +58,7 @@ class _HomeState extends State<Home> {
     return false;
   }
 
-  void _goToGame(Level level) async {
+  dynamic _goToGame(Level level) async {
     setState(() {
       isLoading = true;
     });
@@ -55,6 +67,22 @@ class _HomeState extends State<Home> {
       GameData instance = GameData(levelName: level.name);
 
       await instance.getQuestions();
+
+      print(instance.questions);
+
+      if(instance.questions[0] == -1) {
+        Alert().showAlert(context, "Error!", "Please ensure you have an active internet connection!");
+        setState(() {
+          isLoading = false;
+        });
+        return;
+      } else if(instance.questions[0] == -2) {
+        Alert().showAlert(context, "Error!", "Something went wrong. Please try again later");
+        setState(() {
+          isLoading = false;
+        });
+        return;
+      }
 
       Score gameScore = Score(level: level.name);
 
