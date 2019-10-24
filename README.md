@@ -23,6 +23,17 @@
 * [x] Lock the next level until the user has completed 60% of questions from previous level
 
 # Screenshots
+Main Screen                |  Game Screen
+:-------------------------:|:-------------------------:
+![Main Screen](./mockups/main.png)  |  ![Game Screen](./mockups/game_screen.png)
+
+   Correct Answer                             |   Wrong Answer                            
+:--------------------------------------------:|:------------------------------------------:
+![Main Screen](./mockups/correct_answer.png)  | ![Game Screen](./mockups/wrong_answer.png)
+
+Level Warning Screen                         |
+:-------------------------------------------:|
+![Level Warning](./mockups/level_warning.png)|
 
 # Donate
 > If you found this project helpful or you learned something from the source code and want to thank me, consider buying me a cup of :coffee:
