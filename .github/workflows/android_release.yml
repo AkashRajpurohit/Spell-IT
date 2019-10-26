@@ -18,9 +18,10 @@ jobs:
         flutter-version: '1.9.1+hotfix.4'
         channel: 'stable'
     - run: flutter pub get
-    - run: cd ./iwfpapp && flutter build apk --split-per-abi
-    - name: upload artifects
-      uses: actions/upload-artifact@master
+    - run: cd ./Spell-IT && flutter build apk --split-per-abi
+    - run: flutter build apk --debug --split-per-abi
+    - name: Push APK to Releases
+      uses: ncipollo/release-action@v1
       with:
-        name: android-app
-        path: iwfpapp/build/app/outputs
+        artifacts: "build/app/outputs/apk/debug/*.apk"
+        token: ${{ secrets.TOKEN }}
