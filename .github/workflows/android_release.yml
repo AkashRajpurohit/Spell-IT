@@ -18,7 +18,6 @@ jobs:
         flutter-version: '1.9.1+hotfix.4'
         channel: 'stable'
     - run: flutter pub get
-    - run: cd ./Spell-IT && flutter build apk --split-per-abi
     - run: flutter build apk --debug --split-per-abi
     - name: Push APK to Releases
       uses: ncipollo/release-action@v1
