@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:convert';
+
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spell_it/components/alert.dart';
 
 class GameData {
@@ -11,16 +14,28 @@ class GameData {
 
   Future<void> getQuestions() async {
 
-    try {
-      Response response = await get('https://spell-it-akash.firebaseapp.com/level/$levelName');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-      Map data = json.decode(response.body);
+    String cachedQuestions = prefs.getString('level-$levelName');
 
-      this.questions = data['data'];
-    } on SocketException catch(e) {
-      this.questions = [-1];
-    } catch(e) {
-      this.questions = [-2];
+    if(cachedQuestions != null) {
+      // Return cached questions
+      this.questions = json.decode(cachedQuestions);
+    } else {
+      // Make API call
+      try {
+        Response response = await get('https://spell-it-akash.firebaseapp.com/level/$levelName');
+
+        Map data = json.decode(response.body);
+
+        this.questions = data['data'];
+
+        prefs.setString('level-$levelName', json.encode(data['data']));
+      } on SocketException catch(e) {
+        this.questions = [-1];
+      } catch(e) {
+        this.questions = [-2];
+      }
     }
   }
 }
