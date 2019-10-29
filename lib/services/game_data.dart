@@ -16,26 +16,54 @@ class GameData {
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    String cachedQuestions = prefs.getString('level-$levelName');
+    String cachedData = prefs.getString('level-$levelName');
 
-    if(cachedQuestions != null) {
-      // Return cached questions
-      this.questions = json.decode(cachedQuestions);
+    if(cachedData != null) {
+      // Check for expiry in cache
+      Map cache = json.decode(cachedData);
+
+      var now = new DateTime.now();
+      var expiry = DateTime.parse(cache['expiry']);
+      var difference = now.difference(expiry);
+
+      // Save cache for only 1 day
+      if(difference.inDays > 1) {
+        // remove this cache
+        prefs.remove('level-$levelName');
+        // make api call for new questions
+        print("Make API call for updated questions");
+        await makeAPIRequest();
+      } else {
+        // serve from cache
+        this.questions = cache['questions'];
+      }
     } else {
       // Make API call
-      try {
-        Response response = await get('https://spell-it-akash.firebaseapp.com/level/$levelName');
+      await makeAPIRequest();
+    }
+  }
 
-        Map data = json.decode(response.body);
+  Future<void> makeAPIRequest() async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-        this.questions = data['data'];
+      Response response = await get('https://spell-it-akash.firebaseapp.com/level/$levelName');
 
-        prefs.setString('level-$levelName', json.encode(data['data']));
-      } on SocketException catch(e) {
-        this.questions = [-1];
-      } catch(e) {
-        this.questions = [-2];
-      }
+      Map data = json.decode(response.body);
+
+      this.questions = data['data'];
+
+      Map cacheData = {
+        'questions': data['data'],
+        'expiry': new DateTime.now().toString()
+      };
+
+      prefs.setString('level-$levelName', json.encode(cacheData));
+    } on SocketException catch(e) {
+      this.questions = [-1];
+    } catch(e) {
+      print(e);
+      this.questions = [-2];
     }
   }
 }
