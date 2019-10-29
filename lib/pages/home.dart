@@ -68,8 +68,6 @@ class _HomeState extends State<Home> {
 
       await instance.getQuestions();
 
-      print(instance.questions);
-
       if(instance.questions[0] == -1) {
         Alert().showAlert(context, "Error!", "Please ensure you have an active internet connection!");
         setState(() {
