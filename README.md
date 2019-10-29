@@ -21,6 +21,7 @@
 * [x] Connect to nodejs API deployed on firebase
 * [x] Show loader while the data is loading from the API
 * [x] Lock the next level until the user has completed 60% of questions from previous level
+* [x] Caching questions in shared preferences to reduce network calls and improve performance and user experience
 
 # Screenshots
 Main Screen                |  Game Screen
