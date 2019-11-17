@@ -41,6 +41,9 @@ Level Warning Screen                         |
 >
 > - [PayPal](https://www.paypal.me/RajpurohitAkash/)
 
+# Download
+You can [download](https://github.com/AkashRajpurohit/Spell-IT/releases/download/v1.0.1/app-arm64-v8a-release.apk) the application for android and try the it yourself.
+
 # Bugs or Requests
 
 If you encounter any problems feel free to open an [issue](https://github.com/AkashRajpurohit/Spell-IT/issues/new?template=bug_report.md). If you feel the library is missing a feature, please raise a [ticket](https://github.com/AkashRajpurohit/Spell-IT/issues/new?template=feature_request.md) on GitHub and I'll look into it. Pull request are also welcome.
