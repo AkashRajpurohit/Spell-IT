@@ -38,11 +38,11 @@ Level Warning Screen                         |
 
 # Donate
 > If you found this project helpful or you learned something from the source code and want to thank me, consider buying me a cup of :coffee:
->
-> - [PayPal](https://www.paypal.me/RajpurohitAkash/)
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/RajpurohitAkash)
 
 # Download
-You can [download](https://github.com/AkashRajpurohit/Spell-IT/releases/download/v1.0.1/app-arm64-v8a-release.apk) the application for android and try the it yourself.
+You can [download](https://github.com/AkashRajpurohit/Spell-IT/releases/download/v1.0.1/app-arm64-v8a-release.apk) the application for android and try it yourself.
 
 # Bugs or Requests
 
