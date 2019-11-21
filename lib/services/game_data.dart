@@ -31,7 +31,6 @@ class GameData {
         // remove this cache
         prefs.remove('level-$levelName');
         // make api call for new questions
-        print("Make API call for updated questions");
         await makeAPIRequest();
       } else {
         // serve from cache
