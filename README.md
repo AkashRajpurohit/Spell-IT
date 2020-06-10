@@ -9,6 +9,12 @@
 <p align="center">
     <img alt="" title=Spell IT" src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">
     <img alt="" title="Spell IT" src="https://img.shields.io/badge/Build%20with-Flutter-blue">
+    <img alt="" title="Spell IT" src="https://img.shields.io/github/stars/AkashRajpurohit/Spell-IT">
+    <img alt="" title="Spell IT" src="https://img.shields.io/github/forks/AkashRajpurohit/Spell-IT">
+    <img alt="" title="Spell IT" src="https://img.shields.io/github/issues/AkashRajpurohit/Spell-IT">
+    <img alt="" title="Spell IT" src="https://img.shields.io/github/license/AkashRajpurohit/Spell-IT">
+    <img alt="" title="Spell IT" src="https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2FAkashRajpurohit%2FSpell-IT">
+
 </p>
 <p align="center">
     <a href="https://github.com/AkashRajpurohit/Spell-IT/releases">
