@@ -13,7 +13,7 @@
     <img alt="" title="Spell IT" src="https://img.shields.io/github/forks/AkashRajpurohit/Spell-IT">
     <img alt="" title="Spell IT" src="https://img.shields.io/github/issues/AkashRajpurohit/Spell-IT">
     <img alt="" title="Spell IT" src="https://img.shields.io/github/license/AkashRajpurohit/Spell-IT">
-    <img alt="" title="Spell IT" src="https://visitor-badge.glitch.me/badge?page_id=akashrajpurohit-spellit.visitor-badge">
+    <img alt="" title="Spell IT" src="https://visitor-badge.laobi.icu/badge?page_id=akashrajpurohit-spellit.visitor-badge">
     <img alt="" title="Spell IT" src="https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2FAkashRajpurohit%2FSpell-IT">
 
 </p>
