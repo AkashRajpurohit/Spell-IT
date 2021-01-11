@@ -46,7 +46,7 @@ class GameData {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-      Response response = await get('https://spell-it-akash.firebaseapp.com/level/$levelName');
+      Response response = await get('https://mock-server-akash.vercel.app/api/spell-it/level/$levelName');
 
       Map data = json.decode(response.body);
 
