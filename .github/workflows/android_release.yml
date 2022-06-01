@@ -20,8 +20,8 @@ jobs:
           flutter-version: '1.9.1+hotfix.4'
           channel: 'stable'
 
-      - name: Decode android/neumodore_key.jks
-        run: echo "${{ secrets.KEYSTORE_JKS_PROD }}" | base64 --decode > android/key.jks
+      - name: Decode android/app/key.jks
+        run: echo "${{ secrets.KEYSTORE_JKS_PROD }}" | base64 --decode > android/app/key.jks
 
       - name: Decode android/key.properties
         run: echo "${{ secrets.KEY_PROPERTIES_PROD }}" | base64 --decode > android/key.properties
