@@ -1,7 +1,7 @@
 on:
   push:
-    branches: 
-      - release/*
+    tags:
+      - '*'
 
 name: Build and Release apk
 jobs:
